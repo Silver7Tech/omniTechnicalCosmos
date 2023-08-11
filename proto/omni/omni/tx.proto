@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package omni.omni;
+
+option go_package = "omni/x/omni/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc GetStorage (MsgGetStorage) returns (MsgGetStorageResponse);
+}
+message MsgGetStorage {
+  string creator  = 1;
+  string address  = 2;
+  string position = 3;
+  string blockTag = 4;
+}
+
+message MsgGetStorageResponse {}
+

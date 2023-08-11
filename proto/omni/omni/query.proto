@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package omni.omni;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "omni/omni/params.proto";
+import "omni/omni/omni.proto";
+
+option go_package = "omni/x/omni/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/omni/omni/params";
+  
+  }
+  
+  // Queries a list of Omni items.
+  rpc Omni    (QueryGetOmniRequest) returns (QueryGetOmniResponse) {
+    option (google.api.http).get = "/omni/omni/omni/{id}";
+  
+  }
+  rpc OmniAll (QueryAllOmniRequest) returns (QueryAllOmniResponse) {
+    option (google.api.http).get = "/omni/omni/omni";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetOmniRequest {
+  uint64 id = 1;
+}
+
+message QueryGetOmniResponse {
+  Omni Omni = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllOmniRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllOmniResponse {
+  repeated Omni                                   Omni       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

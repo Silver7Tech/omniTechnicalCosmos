@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package omni.omni;
+
+import "gogoproto/gogo.proto";
+import "omni/omni/params.proto";
+import "omni/omni/omni.proto";
+
+option go_package = "omni/x/omni/types";
+
+// GenesisState defines the omni module's genesis state.
+message GenesisState {
+           Params params    = 1 [(gogoproto.nullable) = false];
+  repeated Omni   omniList  = 2 [(gogoproto.nullable) = false];
+           uint64 omniCount = 3;
+}
+

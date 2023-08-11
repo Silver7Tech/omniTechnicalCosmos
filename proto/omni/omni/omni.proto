@@ -1,0 +1,13 @@
+syntax = "proto3";
+package omni.omni;
+
+option go_package = "omni/x/omni/types";
+
+message Omni {
+  uint64 id = 1;
+  string address = 2; 
+  string position = 3; 
+  string blockTag = 4; 
+  string storage = 5; 
+  
+}
